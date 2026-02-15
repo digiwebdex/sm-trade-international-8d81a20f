@@ -2,6 +2,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 import { Button } from '@/components/ui/button';
 import { useEffect, useRef } from 'react';
+import heroBg from '@/assets/hero-bg.jpg';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -26,11 +27,14 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="relative min-h-[85vh] flex items-center overflow-hidden">
-      {/* Parallax base */}
+      {/* Background image with parallax */}
       <div
         ref={bgRef}
-        className="absolute inset-0 -top-20 -bottom-20 will-change-transform bg-[hsl(0,0%,4%)]"
+        className="absolute inset-0 -top-20 -bottom-20 will-change-transform bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroBg})` }}
       />
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-[hsl(0,0%,4%)] opacity-60" />
 
       {/* Animated gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
