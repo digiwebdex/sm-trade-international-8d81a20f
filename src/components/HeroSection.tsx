@@ -105,7 +105,7 @@ const HeroSection = () => {
             className="inline-block bg-white/10 backdrop-blur-sm text-white text-xs font-semibold px-5 py-2 rounded-full mb-8 tracking-widest uppercase border border-white/10"
             style={{ animation: 'heroFadeUp 0.8s ease-out both' }}
           >
-            S.M. Trade International
+            S. M. Trade International
           </div>
           <h1
             className="text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.1] mb-7 text-white"

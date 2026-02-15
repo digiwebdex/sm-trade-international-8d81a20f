@@ -46,7 +46,7 @@ const AdminLayout = () => {
         <div className="p-4 border-b border-border flex items-center gap-3">
           <img src={logo} alt="Logo" className="w-10 h-10 rounded-full object-cover" />
           <div className="flex-1 min-w-0">
-            <h2 className="font-bold text-sm truncate" style={{ fontFamily: 'Inter, sans-serif' }}>SM Trade</h2>
+            <h2 className="font-bold text-sm truncate" style={{ fontFamily: 'Inter, sans-serif' }}>S. M. Trade</h2>
             <p className="text-xs text-muted-foreground">Admin Panel</p>
           </div>
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setSidebarOpen(false)}>
