@@ -20,7 +20,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img src={logo} alt="Logo" className="h-10 rounded" />
-              <span className="font-bold text-lg">S.M. Trade International</span>
+              <span className="font-bold text-lg">S. M. Trade International</span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed">{desc}</p>
           </div>
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/10 mt-8 pt-8 text-center text-white/40 text-sm">
-          © {new Date().getFullYear()} S.M. Trade International. {copyright}
+          © {new Date().getFullYear()} S. M. Trade International. {copyright}
         </div>
       </div>
     </footer>

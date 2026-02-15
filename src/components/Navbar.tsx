@@ -26,10 +26,10 @@ const Navbar = () => {
     <nav className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/95 backdrop-blur shadow-md' : 'bg-background'}`}>
       <div className="container mx-auto px-4 flex items-center justify-between h-16 relative">
         <a href="#home" className="flex items-center gap-2">
-          <img src={logo} alt="S.M. Trade International" className="h-10 w-auto rounded" />
-          <span className="font-bold text-lg hidden md:inline">S.M. Trade International</span>
+          <img src={logo} alt="S. M. Trade International" className="h-10 w-auto rounded" />
+          <span className="font-bold text-lg hidden md:inline">S. M. Trade International</span>
         </a>
-        <span className="md:hidden absolute left-1/2 -translate-x-1/2 font-bold text-xs tracking-wide text-center leading-tight">S.M. Trade International</span>
+        <span className="md:hidden absolute left-1/2 -translate-x-1/2 font-bold text-xs tracking-wide text-center leading-tight">S. M. Trade International</span>
         <div className="hidden md:flex items-center gap-6">
           {links.map(l => (
             <a key={l.key} href={l.href} className="font-medium hover:text-sm-red transition-colors text-sm">

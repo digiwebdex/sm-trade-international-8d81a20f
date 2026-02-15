@@ -22,7 +22,7 @@ const translations: Record<string, Record<Lang, string>> = {
   'hero.contact': { en: 'View Products', bn: 'পণ্য দেখুন' },
   // About
   'about.title': { en: 'About Us', bn: 'আমাদের সম্পর্কে' },
-  'about.desc': { en: 'S.M. Trade International is a leading trading company specializing in customized promotional and corporate gift items. We serve both government and private sector organizations, delivering high-quality branded products with precision and care.', bn: 'এস.এম. ট্রেড ইন্টারন্যাশনাল একটি শীর্ষস্থানীয় ট্রেডিং কোম্পানি যা কাস্টমাইজড প্রমোশনাল ও কর্পোরেট গিফট আইটেমে বিশেষজ্ঞ। আমরা সরকারি ও বেসরকারি উভয় প্রতিষ্ঠানে সেবা প্রদান করি, নির্ভুলতা ও যত্নের সাথে উচ্চমানের ব্র্যান্ডেড পণ্য সরবরাহ করি।' },
+  'about.desc': { en: 'S. M. Trade International is a leading trading company specializing in customized promotional and corporate gift items. We serve both government and private sector organizations, delivering high-quality branded products with precision and care.', bn: 'এস. এম. ট্রেড ইন্টারন্যাশনাল একটি শীর্ষস্থানীয় ট্রেডিং কোম্পানি যা কাস্টমাইজড প্রমোশনাল ও কর্পোরেট গিফট আইটেমে বিশেষজ্ঞ। আমরা সরকারি ও বেসরকারি উভয় প্রতিষ্ঠানে সেবা প্রদান করি, নির্ভুলতা ও যত্নের সাথে উচ্চমানের ব্র্যান্ডেড পণ্য সরবরাহ করি।' },
   'about.stat1.label': { en: 'Years Experience', bn: 'বছরের অভিজ্ঞতা' },
   'about.stat2.label': { en: 'Happy Clients', bn: 'সন্তুষ্ট ক্লায়েন্ট' },
   'about.stat3.label': { en: 'Products Delivered', bn: 'পণ্য সরবরাহ' },

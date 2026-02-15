@@ -33,9 +33,9 @@ const AdminLogin = () => {
     <div className="min-h-screen flex items-center justify-center bg-sm-black p-4">
       <Card className="w-full max-w-md border-0 shadow-2xl">
         <CardHeader className="text-center pb-2">
-          <img src={logo} alt="S.M. Trade International" className="w-16 h-16 rounded-full mx-auto mb-4 object-cover" />
+          <img src={logo} alt="S. M. Trade International" className="w-16 h-16 rounded-full mx-auto mb-4 object-cover" />
           <CardTitle className="text-2xl">Admin Panel</CardTitle>
-          <p className="text-muted-foreground text-sm mt-1">S.M. Trade International</p>
+          <p className="text-muted-foreground text-sm mt-1">S. M. Trade International</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
