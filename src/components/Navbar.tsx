@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { usePrefetchHome } from '@/hooks/usePrefetchHome';
 import logo from '@/assets/logo.jpeg';
 
 const Navbar = () => {
   const { t } = useLanguage();
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const prefetchHome = usePrefetchHome();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -69,6 +71,7 @@ const Navbar = () => {
               <a
                 key={l.key}
                 href={resolveHref(l.href)}
+                onMouseEnter={!isHome ? prefetchHome : undefined}
                 className="relative px-4 py-2 font-medium text-sm text-foreground/80 hover:text-foreground transition-colors duration-300 group"
               >
                 {t(l.key)}

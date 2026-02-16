@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { X, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 
 // Static fallback images
@@ -74,7 +75,7 @@ const ProductsSection = () => {
   const [lightbox, setLightbox] = useState<DisplayProduct | null>(null);
 
   // Fetch ALL products (active + inactive) for availability filter
-  const { data: dbProducts = [] } = useQuery({
+  const { data: dbProducts = [], isLoading: productsLoading } = useQuery({
     queryKey: ['public-products-all'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -241,7 +242,20 @@ const ProductsSection = () => {
         </p>
 
         {/* Product grid */}
-        {filtered.length === 0 ? (
+        {productsLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="rounded-2xl border border-border/30 overflow-hidden bg-background">
+                <Skeleton className="aspect-square w-full" />
+                <div className="p-3 space-y-2">
+                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton className="h-3 w-1/2" />
+                  <Skeleton className="h-3 w-full" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="text-center py-16 text-muted-foreground">{noResults}</div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
