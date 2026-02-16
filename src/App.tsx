@@ -11,6 +11,7 @@ import NotFound from "./pages/NotFound";
 
 const Portfolio = lazy(() => import("./pages/Portfolio"));
 const Catalog = lazy(() => import("./pages/Catalog"));
+const GalleryPage = lazy(() => import("./pages/Gallery"));
 
 // Lazy-load admin routes – they're never needed on the public site
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
@@ -48,6 +49,9 @@ const App = () => (
               } />
               <Route path="/portfolio" element={
                 <Suspense fallback={<AdminFallback />}><Portfolio /></Suspense>
+              } />
+              <Route path="/gallery" element={
+                <Suspense fallback={<AdminFallback />}><GalleryPage /></Suspense>
               } />
               <Route path="/admin/login" element={
                 <Suspense fallback={<AdminFallback />}><AdminLogin /></Suspense>
