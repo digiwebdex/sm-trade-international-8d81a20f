@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { X, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { Switch } from '@/components/ui/switch';
 
 // Static fallback images
 import img1 from '@/assets/products/ties-blue.png';
@@ -60,8 +61,10 @@ const ProductsSection = () => {
   const { t, lang } = useLanguage();
   const [filter, setFilter] = useState('all');
   const [search, setSearch] = useState('');
+  const [showAll, setShowAll] = useState(false);
   const [lightbox, setLightbox] = useState<DisplayProduct | null>(null);
 
+  // Fetch ALL products (active + inactive) for availability filter
   const { data: dbProducts = [] } = useQuery({
     queryKey: ['public-products-all'],
     queryFn: async () => {
@@ -93,7 +96,7 @@ const ProductsSection = () => {
 
   const allProducts: DisplayProduct[] = useMemo(() => {
     if (useDbData) {
-      return dbProducts.filter(p => p.is_active).map(p => {
+      return dbProducts.map(p => {
         const cat = (p as any).categories;
         return {
           src: p.image_url || '',
@@ -123,6 +126,7 @@ const ProductsSection = () => {
     }));
   }, [dbProducts, useDbData, lang]);
 
+  // Build filter categories
   const filterCategories = useMemo(() => {
     if (useDbData) {
       return [
@@ -141,64 +145,93 @@ const ProductsSection = () => {
     ];
   }, [useDbData, dbCategories, lang, t]);
 
+  // Apply all filters
   const filtered = useMemo(() => {
     let result = allProducts;
-    if (filter !== 'all') result = result.filter(p => p.category === filter);
+
+    // Availability filter
+    if (!showAll) {
+      result = result.filter(p => p.isActive);
+    }
+
+    // Category filter
+    if (filter !== 'all') {
+      result = result.filter(p => p.category === filter);
+    }
+
+    // Search filter (searches both languages)
     if (search.trim()) {
       const q = search.toLowerCase().trim();
       result = result.filter(p =>
-        p.titleEn.toLowerCase().includes(q) || p.titleBn.includes(q) ||
-        p.descEn.toLowerCase().includes(q) || p.descBn.includes(q) ||
+        p.titleEn.toLowerCase().includes(q) ||
+        p.titleBn.includes(q) ||
+        p.descEn.toLowerCase().includes(q) ||
+        p.descBn.includes(q) ||
         p.categoryLabel.toLowerCase().includes(q)
       );
     }
+
     return result;
-  }, [allProducts, filter, search]);
+  }, [allProducts, filter, search, showAll]);
 
   const searchPlaceholder = lang === 'en' ? 'Search products...' : 'পণ্য খুঁজুন...';
+  const showAllLabel = lang === 'en' ? 'Show inactive' : 'নিষ্ক্রিয় দেখান';
   const noResults = lang === 'en' ? 'No products found.' : 'কোনো পণ্য পাওয়া যায়নি।';
 
   return (
-    <section id="products" className="py-24 bg-secondary">
-      <div className="container mx-auto px-4">
+    <section id="products" className="py-24 bg-secondary relative overflow-hidden">
+      {/* Subtle pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: 'radial-gradient(hsl(var(--sm-gold)) 1px, transparent 1px)',
+        backgroundSize: '28px 28px',
+      }} />
+      <div className="container mx-auto px-4 relative">
         <div className="text-center mb-10">
-          <span className="text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4 block" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+          <span className="inline-block text-accent text-xs font-semibold tracking-widest uppercase mb-3" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             {lang === 'en' ? 'Our Products' : 'আমাদের পণ্য'}
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mb-5">{t('products.title')}</h2>
-          <div className="w-12 h-px bg-accent mx-auto" />
+          <div className="flex items-center justify-center gap-3">
+            <div className="h-px w-12 bg-accent/40" />
+            <div className="w-2 h-2 rotate-45 bg-accent/70" />
+            <div className="h-px w-12 bg-accent/40" />
+          </div>
         </div>
 
-        {/* Search */}
-        <div className="max-w-sm mx-auto mb-6 relative">
+        {/* Search bar */}
+        <div className="max-w-md mx-auto mb-6 relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder={searchPlaceholder}
-            className="pl-10 rounded-full border-border/40 bg-background"
+            className="pl-10 rounded-full bg-background border-border"
           />
         </div>
 
-        {/* Filter chips */}
-        <div className="flex justify-center gap-2 mb-10 flex-wrap">
-          {filterCategories.map(c => (
-            <button
-              key={c.id}
-              onClick={() => setFilter(c.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                filter === c.id
-                  ? 'bg-foreground text-background'
-                  : 'bg-background text-muted-foreground hover:text-foreground border border-border/40'
-              }`}
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
-              {c.label}
-            </button>
-          ))}
+        {/* Category filter chips + availability toggle */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+          <div className="flex justify-center gap-2 flex-wrap">
+            {filterCategories.map(c => (
+              <button
+                key={c.id}
+                onClick={() => setFilter(c.id)}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${filter === c.id ? 'bg-sm-red text-white' : 'bg-background text-foreground hover:bg-accent'}`}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Grid */}
+        {/* Results count */}
+        <p className="text-center text-xs text-muted-foreground mb-4">
+          {lang === 'en'
+            ? `${filtered.length} product${filtered.length !== 1 ? 's' : ''} found`
+            : `${filtered.length}টি পণ্য পাওয়া গেছে`}
+        </p>
+
+        {/* Product grid */}
         {filtered.length === 0 ? (
           <div className="text-center py-16 text-muted-foreground">{noResults}</div>
         ) : (
@@ -206,32 +239,48 @@ const ProductsSection = () => {
             {filtered.map((p, i) => (
               <div
                 key={i}
-                className="group cursor-pointer overflow-hidden rounded-xl bg-background border border-border/30 hover:shadow-lg transition-all duration-300 flex flex-col"
+                className="group cursor-pointer overflow-hidden rounded-2xl bg-background shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative border border-border/30 flex flex-col"
                 onClick={() => setLightbox(p)}
               >
-                <div className="aspect-square overflow-hidden bg-muted">
+                {!p.isActive && (
+                  <span className="absolute top-3 left-3 z-10 bg-muted text-muted-foreground text-[10px] px-2 py-0.5 rounded-full">
+                    {lang === 'en' ? 'Inactive' : 'নিষ্ক্রিয়'}
+                  </span>
+                )}
+                {p.categoryLabel && (
+                  <span className="absolute top-3 right-3 z-10 bg-primary/80 text-primary-foreground text-[10px] px-2.5 py-1 rounded-full backdrop-blur-sm">
+                    {p.categoryLabel}
+                  </span>
+                )}
+                {/* Gold corner accents on hover */}
+                <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[hsl(var(--sm-gold))]/0 group-hover:border-[hsl(var(--sm-gold))]/60 transition-all duration-300 rounded-tl-2xl z-10" />
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[hsl(var(--sm-gold))]/0 group-hover:border-[hsl(var(--sm-gold))]/60 transition-all duration-300 rounded-br-2xl z-10" />
+                <div className={`aspect-square overflow-hidden bg-muted relative ${!p.isActive ? 'opacity-50' : ''}`}>
                   {p.src ? (
                     <img
                       src={p.src}
                       alt={p.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">{p.title}</div>
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">
+                      {p.title}
+                    </div>
                   )}
                 </div>
+                {/* E-commerce details body */}
                 <div className="p-3 flex flex-col gap-1.5 flex-1">
                   <h3 className="font-semibold text-sm text-foreground line-clamp-2 leading-tight">{p.title}</h3>
                   {p.categoryLabel && (
-                    <span className="inline-block self-start bg-muted text-muted-foreground text-[10px] font-medium px-2 py-0.5 rounded-full">
+                    <span className="inline-block self-start bg-primary/10 text-primary text-[10px] font-medium px-2 py-0.5 rounded-full">
                       {p.categoryLabel}
                     </span>
                   )}
                   {p.desc && (
                     <p className="text-muted-foreground text-xs line-clamp-2 leading-relaxed">{p.desc}</p>
                   )}
-                  <span className="mt-auto pt-1.5 text-[11px] font-semibold text-accent group-hover:underline">
+                  <span className="mt-auto pt-1.5 text-[11px] font-semibold text-[hsl(var(--sm-gold))] group-hover:underline">
                     {lang === 'en' ? 'Request Quote →' : 'কোটেশন চান →'}
                   </span>
                 </div>
@@ -241,23 +290,35 @@ const ProductsSection = () => {
         )}
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox with bilingual details */}
       {lightbox && (
         <div className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4" onClick={() => setLightbox(null)}>
-          <button className="absolute top-4 right-4 text-white/60 hover:text-white z-10" onClick={() => setLightbox(null)}>
-            <X className="h-7 w-7" />
+          <button className="absolute top-4 right-4 text-white z-10" onClick={() => setLightbox(null)}>
+            <X className="h-8 w-8" />
           </button>
-          <div className="max-w-2xl w-full flex flex-col items-center gap-6" onClick={e => e.stopPropagation()}>
+          <div className="max-w-3xl w-full flex flex-col items-center gap-4" onClick={e => e.stopPropagation()}>
             {lightbox.src && (
               <img src={lightbox.src} alt={lightbox.title} className="max-w-full max-h-[55vh] object-contain rounded-lg" />
             )}
-            <div className="text-center space-y-3 max-w-lg">
+            <div className="text-center space-y-3 max-w-xl">
               <h3 className="text-xl font-bold text-white">{lightbox.title}</h3>
-              {lightbox.desc && <p className="text-white/50 text-sm leading-relaxed">{lightbox.desc}</p>}
+              {lightbox.categoryLabel && (
+                <span className="inline-block bg-primary/20 text-primary-foreground text-xs px-3 py-1 rounded-full">{lightbox.categoryLabel}</span>
+              )}
+              {lightbox.desc && (
+                <p className="text-white/60 text-sm leading-relaxed">{lightbox.desc}</p>
+              )}
+              {/* Bilingual alternate */}
+              {lightbox.titleBn && lightbox.titleEn && (
+                <p className="text-white/30 text-xs pt-2 border-t border-white/10">
+                  {lang === 'en' ? `বাংলা: ${lightbox.titleBn}` : `English: ${lightbox.titleEn}`}
+                </p>
+              )}
+              {/* Request Quote CTA */}
               <a
                 href="#contact"
                 onClick={() => setLightbox(null)}
-                className="inline-block mt-3 px-8 py-2.5 rounded-full border border-accent text-accent text-sm font-semibold hover:bg-accent hover:text-white transition-colors duration-200"
+                className="inline-block mt-3 px-6 py-2.5 rounded-full bg-[hsl(var(--sm-gold))] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
               >
                 {lang === 'en' ? 'Request Quote' : 'কোটেশন অনুরোধ'}
               </a>
