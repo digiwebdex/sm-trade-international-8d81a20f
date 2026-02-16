@@ -156,15 +156,15 @@ const HeroSection = () => {
                           backfaceVisibility: 'hidden',
                         }}
                       >
-                        <div className={`relative p-3 rounded-2xl border transition-all duration-500 ${
+                        <div className={`relative p-4 rounded-2xl border transition-all duration-500 bg-white ${
                           i === current
-                            ? 'bg-white/15 backdrop-blur-lg border-white/25 shadow-2xl shadow-accent/20 scale-110'
-                            : 'bg-white/5 backdrop-blur-sm border-white/10 scale-90 opacity-60'
+                            ? 'border-accent/30 shadow-2xl shadow-accent/20 scale-110'
+                            : 'border-gray-200 scale-90 opacity-60'
                         }`}>
                           <img
                             src={item.img}
                             alt={item.label}
-                            className="w-36 h-36 md:w-44 md:h-44 object-contain drop-shadow-xl"
+                            className="w-36 h-36 md:w-44 md:h-44 object-contain"
                           />
                           <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all duration-500 ${
                             i === current
