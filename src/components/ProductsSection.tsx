@@ -30,18 +30,18 @@ interface StaticProduct {
 }
 
 const staticProducts: StaticProduct[] = [
-  { src: img1, titleEn: 'Customized Ties', titleBn: 'কাস্টমাইজড টাই', descEn: 'Premium silk ties with custom branding.', descBn: 'কাস্টম ব্র্যান্ডিং সহ প্রিমিয়াম সিল্ক টাই।', category: 'corporate' },
-  { src: img2, titleEn: 'BPATC Project', titleBn: 'বিপিএটিসি প্রজেক্ট', descEn: 'Custom project for BPATC.', descBn: 'বিপিএটিসির জন্য কাস্টম প্রকল্প।', category: 'souvenir' },
-  { src: img3, titleEn: 'Leather Goods', titleBn: 'লেদার পণ্য', descEn: 'Genuine leather products.', descBn: 'আসল চামড়ার পণ্য।', category: 'corporate' },
-  { src: img4, titleEn: 'Custom Bags', titleBn: 'কাস্টম ব্যাগ', descEn: 'Branded bags for events.', descBn: 'ইভেন্টের জন্য ব্র্যান্ডেড ব্যাগ।', category: 'corporate' },
-  { src: img5, titleEn: 'Promotional Items', titleBn: 'প্রমোশনাল আইটেম', descEn: 'Custom promotional gifts.', descBn: 'কাস্টম প্রমোশনাল গিফট।', category: 'corporate' },
-  { src: img6, titleEn: 'Bangabandhu Tunnel Souvenir', titleBn: 'বঙ্গবন্ধু টানেল স্মারক', descEn: 'Commemorative souvenir.', descBn: 'স্মারক উপহার।', category: 'souvenir' },
-  { src: img7, titleEn: 'Custom Products', titleBn: 'কাস্টম পণ্য', descEn: 'Tailor-made corporate items.', descBn: 'কর্পোরেট আইটেম।', category: 'corporate' },
-  { src: img8, titleEn: 'Branded Items', titleBn: 'ব্র্যান্ডেড আইটেম', descEn: 'Logo-printed merchandise.', descBn: 'লোগো-প্রিন্টেড পণ্য।', category: 'corporate' },
-  { src: img9, titleEn: 'Stationery Set', titleBn: 'স্টেশনারি সেট', descEn: 'Premium branded stationery.', descBn: 'প্রিমিয়াম ব্র্যান্ডেড স্টেশনারি।', category: 'stationery' },
-  { src: img10, titleEn: 'Premium Gifts', titleBn: 'প্রিমিয়াম গিফট', descEn: 'Luxury gift collections.', descBn: 'বিলাসবহুল গিফট সংগ্রহ।', category: 'corporate' },
-  { src: img11, titleEn: 'Deli Glassware', titleBn: 'ডেলি গ্লাসওয়্যার', descEn: 'Custom engraved glassware.', descBn: 'কাস্টম খোদাই গ্লাসওয়্যার।', category: 'corporate' },
-  { src: img12, titleEn: 'Special Collection', titleBn: 'স্পেশাল কালেকশন', descEn: 'Exclusive gift collection.', descBn: 'এক্সক্লুসিভ গিফট সংগ্রহ।', category: 'corporate' },
+  { src: img1, titleEn: 'Premium Silk Ties', titleBn: 'প্রিমিয়াম সিল্ক টাই', descEn: 'Hand-crafted silk ties with custom logo embroidery for executive gifting.', descBn: 'এক্সিকিউটিভ গিফটিংয়ের জন্য কাস্টম লোগো এমব্রয়ডারি সহ হাতে তৈরি সিল্ক টাই।', category: 'corporate' },
+  { src: img2, titleEn: 'Commemorative Crest', titleBn: 'স্মারক ক্রেস্ট', descEn: 'Metal crest plaques with custom engraving for government & corporate offices.', descBn: 'সরকারি ও কর্পোরেট অফিসের জন্য কাস্টম খোদাই সহ ধাতব ক্রেস্ট প্ল্যাক।', category: 'souvenir' },
+  { src: img3, titleEn: 'Crystal Award Trophy', titleBn: 'ক্রিস্টাল অ্যাওয়ার্ড ট্রফি', descEn: 'Elegant crystal trophies for recognition ceremonies & corporate events.', descBn: 'স্বীকৃতি অনুষ্ঠান ও কর্পোরেট ইভেন্টের জন্য মার্জিত ক্রিস্টাল ট্রফি।', category: 'corporate' },
+  { src: img4, titleEn: 'Luxury Gift Box', titleBn: 'লাক্সারি গিফট বক্স', descEn: 'Premium leather gift boxes with gold ribbon for VIP corporate presents.', descBn: 'ভিআইপি কর্পোরেট উপহারের জন্য সোনালী রিবন সহ প্রিমিয়াম লেদার গিফট বক্স।', category: 'corporate' },
+  { src: img5, titleEn: 'Executive Pen Set', titleBn: 'এক্সিকিউটিভ পেন সেট', descEn: 'Black & gold branded ballpoint pens — perfect for signing ceremonies.', descBn: 'সাইনিং সেরেমনির জন্য পারফেক্ট — ব্ল্যাক ও গোল্ড ব্র্যান্ডেড বলপয়েন্ট পেন।', category: 'stationery' },
+  { src: img6, titleEn: 'Crystal Souvenir', titleBn: 'ক্রিস্টাল স্যুভেনির', descEn: 'Custom-engraved crystal souvenirs for landmark projects & inaugurations.', descBn: 'ল্যান্ডমার্ক প্রকল্প ও উদ্বোধনের জন্য কাস্টম-খোদাই ক্রিস্টাল স্যুভেনির।', category: 'souvenir' },
+  { src: img7, titleEn: 'Wooden Desk Organizer', titleBn: 'কাঠের ডেস্ক অর্গানাইজার', descEn: 'Handcrafted wooden pen & card holder for the modern executive desk.', descBn: 'আধুনিক এক্সিকিউটিভ ডেস্কের জন্য হাতে তৈরি কাঠের পেন ও কার্ড হোল্ডার।', category: 'stationery' },
+  { src: img8, titleEn: 'Insulated Thermos', titleBn: 'ইনসুলেটেড থার্মোস', descEn: 'Matte black stainless steel flask with custom logo branding.', descBn: 'কাস্টম লোগো ব্র্যান্ডিং সহ ম্যাট ব্ল্যাক স্টেইনলেস স্টিল ফ্লাস্ক।', category: 'corporate' },
+  { src: img9, titleEn: 'Leather Portfolio', titleBn: 'লেদার পোর্টফোলিও', descEn: 'Premium brown leather executive portfolio folder for conferences.', descBn: 'কনফারেন্সের জন্য প্রিমিয়াম ব্রাউন লেদার এক্সিকিউটিভ পোর্টফোলিও ফোল্ডার।', category: 'corporate' },
+  { src: img10, titleEn: 'Crystal Paperweight', titleBn: 'ক্রিস্টাল পেপারওয়েট', descEn: 'Polished crystal globe paperweight — an elegant desk accessory.', descBn: 'পলিশড ক্রিস্টাল গ্লোব পেপারওয়েট — একটি মার্জিত ডেস্ক অ্যাক্সেসরি।', category: 'corporate' },
+  { src: img11, titleEn: 'Custom Glassware', titleBn: 'কাস্টম গ্লাসওয়্যার', descEn: 'Elegant crystal glass pitcher for premium hospitality gifting.', descBn: 'প্রিমিয়াম হসপিটালিটি গিফটিংয়ের জন্য মার্জিত ক্রিস্টাল গ্লাস পিচার।', category: 'corporate' },
+  { src: img12, titleEn: 'Gift Hamper', titleBn: 'গিফট হ্যাম্পার', descEn: 'Curated luxury gift basket with gold ribbon — ideal for festivals & events.', descBn: 'সোনালী রিবন সহ কিউরেটেড লাক্সারি গিফট বাস্কেট — উৎসব ও ইভেন্টের জন্য আদর্শ।', category: 'corporate' },
 ];
 
 type DisplayProduct = {
