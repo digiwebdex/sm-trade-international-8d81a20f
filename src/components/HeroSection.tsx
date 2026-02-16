@@ -125,57 +125,84 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right — Product Carousel */}
+          {/* Right — 3D Product Carousel */}
           <div
             className="relative flex flex-col items-center justify-center"
             style={{ animation: 'heroFadeUp 0.7s 0.4s ease-out both' }}
           >
-            {/* Main product display */}
-            <div className="relative w-full max-w-md aspect-square">
-              {/* Glow behind product */}
-              <div className="absolute inset-8 rounded-full bg-primary/20 blur-3xl" />
+            <div className="relative w-full max-w-md" style={{ perspective: '1000px' }}>
+              {/* Glow behind carousel */}
+              <div className="absolute inset-12 rounded-full bg-accent/15 blur-3xl" />
 
-              {/* Product image */}
-              <div className="relative w-full h-full flex items-center justify-center p-8">
-                {carouselItems.map((item, i) => (
-                  <img
-                    key={i}
-                    src={item.img}
-                    alt={item.label}
-                    className={`absolute max-w-[75%] max-h-[75%] object-contain drop-shadow-2xl transition-all duration-500 ${
-                      i === current
-                        ? 'opacity-100 scale-100 translate-x-0'
-                        : i < current
-                        ? 'opacity-0 scale-90 -translate-x-12'
-                        : 'opacity-0 scale-90 translate-x-12'
-                    }`}
-                  />
-                ))}
+              {/* 3D Carousel ring */}
+              <div className="relative w-full aspect-square flex items-center justify-center">
+                <div
+                  className="relative w-48 h-48 md:w-56 md:h-56"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    transform: `rotateY(${-current * (360 / carouselItems.length)}deg)`,
+                    transition: 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                  }}
+                >
+                  {carouselItems.map((item, i) => {
+                    const angle = (360 / carouselItems.length) * i;
+                    const radius = 220;
+                    return (
+                      <div
+                        key={i}
+                        className="absolute inset-0 flex items-center justify-center"
+                        style={{
+                          transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
+                          backfaceVisibility: 'hidden',
+                        }}
+                      >
+                        <div className={`relative p-3 rounded-2xl border transition-all duration-500 ${
+                          i === current
+                            ? 'bg-white/15 backdrop-blur-lg border-white/25 shadow-2xl shadow-accent/20 scale-110'
+                            : 'bg-white/5 backdrop-blur-sm border-white/10 scale-90 opacity-60'
+                        }`}>
+                          <img
+                            src={item.img}
+                            alt={item.label}
+                            className="w-36 h-36 md:w-44 md:h-44 object-contain drop-shadow-xl"
+                          />
+                          <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all duration-500 ${
+                            i === current
+                              ? 'bg-accent text-white opacity-100'
+                              : 'bg-white/10 text-white/50 opacity-0'
+                          }`}
+                            style={{ fontFamily: 'DM Sans, sans-serif' }}
+                          >
+                            {item.label}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
 
-              {/* Product label */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md text-white text-sm font-medium px-5 py-2 rounded-full border border-white/15">
-                {carouselItems[current].label}
-              </div>
+              {/* Reflection/floor effect */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-accent/10 blur-2xl rounded-full" />
             </div>
 
             {/* Carousel controls */}
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-6 mt-6">
               <button
                 onClick={prev}
-                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/40 transition-colors"
+                className="w-11 h-11 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white/60 hover:text-white hover:border-accent/50 hover:bg-accent/10 transition-all duration-300"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
 
               {/* Dots */}
-              <div className="flex gap-1.5">
+              <div className="flex gap-2">
                 {carouselItems.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === current ? 'w-6 bg-primary' : 'w-1.5 bg-white/30 hover:bg-white/50'
+                    className={`rounded-full transition-all duration-400 ${
+                      i === current ? 'w-7 h-2 bg-accent' : 'w-2 h-2 bg-white/25 hover:bg-white/50'
                     }`}
                   />
                 ))}
@@ -183,7 +210,7 @@ const HeroSection = () => {
 
               <button
                 onClick={next}
-                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/40 transition-colors"
+                className="w-11 h-11 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm flex items-center justify-center text-white/60 hover:text-white hover:border-accent/50 hover:bg-accent/10 transition-all duration-300"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
