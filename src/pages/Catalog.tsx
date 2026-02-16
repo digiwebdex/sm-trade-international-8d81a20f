@@ -6,6 +6,7 @@ import { Search, X, MessageCircle, ShoppingBag, Check } from 'lucide-react';
 import { useQuoteBasket } from '@/contexts/QuoteBasketContext';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import OptimizedImage from '@/components/OptimizedImage';
 import CatalogFilters from '@/components/catalog/CatalogFilters';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 
@@ -256,11 +257,12 @@ const Catalog = () => {
                       onClick={() => setSelected(p)}
                     >
                       <div className="aspect-[4/3] bg-white overflow-hidden relative">
-                        <img
+                        <OptimizedImage
                           src={p.src}
                           alt={title(p)}
                           className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
+                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                          wrapperClassName="w-full h-full relative"
                         />
                         <div className="absolute top-4 left-4">
                           <span className="bg-primary/90 text-primary-foreground text-[11px] font-semibold px-3 py-1 rounded-full backdrop-blur-sm" style={{ fontFamily: 'DM Sans, sans-serif' }}>

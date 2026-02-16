@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
 import heroBg from '@/assets/hero-bg.jpg';
 
 // Product images for carousel
@@ -51,7 +52,7 @@ const HeroSection = () => {
   return (
     <section id="home" className="relative overflow-hidden bg-foreground">
       {/* Background image with overlay */}
-      <img src={heroBg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20" />
+      <OptimizedImage src={heroBg} alt="" priority blurPlaceholder={false} className="absolute inset-0 w-full h-full object-cover opacity-20" wrapperClassName="absolute inset-0" />
       <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 via-foreground/70 to-primary/30" />
 
       <div className="relative z-10 container mx-auto px-4 py-16 lg:py-24">
@@ -161,10 +162,12 @@ const HeroSection = () => {
                             ? 'border-accent/30 shadow-2xl shadow-accent/20 scale-110'
                             : 'border-gray-200 scale-90 opacity-60'
                         }`}>
-                          <img
+                          <OptimizedImage
                             src={item.img}
                             alt={item.label}
                             className="w-36 h-36 md:w-44 md:h-44 object-contain"
+                            sizes="(min-width: 768px) 176px, 144px"
+                            priority={i === 0}
                           />
                           <div className={`absolute -bottom-3 left-1/2 -translate-x-1/2 text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap transition-all duration-500 ${
                             i === current

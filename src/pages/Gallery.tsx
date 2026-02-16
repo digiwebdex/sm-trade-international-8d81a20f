@@ -3,6 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { ZoomIn } from 'lucide-react';
+import OptimizedImage from '@/components/OptimizedImage';
 import GalleryLightbox from '@/components/gallery/GalleryLightbox';
 
 // Static fallback images
@@ -155,11 +156,12 @@ const Gallery = () => {
                 className="break-inside-avoid group cursor-pointer relative rounded-2xl overflow-hidden bg-white border border-border/30 hover:shadow-xl transition-all duration-300"
                 onClick={() => setLightboxIdx(i)}
               >
-                <img
+                <OptimizedImage
                   src={item.src}
                   alt={title(item)}
                   className="w-full h-auto object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
+                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                  wrapperClassName="relative"
                 />
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/60 transition-all duration-300 flex items-center justify-center">

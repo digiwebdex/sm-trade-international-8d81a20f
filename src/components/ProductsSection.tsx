@@ -5,6 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { X, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
+import OptimizedImage from '@/components/OptimizedImage';
 import { Switch } from '@/components/ui/switch';
 
 // Static fallback images
@@ -280,11 +281,12 @@ const ProductsSection = () => {
                 <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[hsl(var(--sm-gold))]/0 group-hover:border-[hsl(var(--sm-gold))]/60 transition-all duration-300 rounded-br-2xl z-10" />
                 <div className={`aspect-square overflow-hidden bg-white relative ${!p.isActive ? 'opacity-50' : ''}`}>
                   {p.src ? (
-                    <img
+                    <OptimizedImage
                       src={p.src}
                       alt={p.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      loading="lazy"
+                      sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+                      wrapperClassName="w-full h-full relative"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">
