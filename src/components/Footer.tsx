@@ -104,7 +104,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-primary-foreground/10 mt-10 pt-8 flex flex-col items-center gap-4">
           <span className="text-primary-foreground/35 text-sm">
             © {new Date().getFullYear()} S. M. Trade International. {copyright}
           </span>
