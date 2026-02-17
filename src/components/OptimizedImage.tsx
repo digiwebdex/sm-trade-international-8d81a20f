@@ -86,7 +86,7 @@ const OptimizedImage = ({
   const webpSrc = buildWebPSrc(src);
 
   return (
-    <div ref={imgRef} className={cn('overflow-hidden', wrapperClassName)}>
+    <div ref={imgRef} className={cn('relative overflow-hidden', wrapperClassName)}>
       {inView && (
         <picture>
           {/* WebP source for Supabase images */}
