@@ -289,6 +289,7 @@ export type Database = {
           product_id: string
           sku: string | null
           sort_order: number
+          stock: number | null
           unit_price: number
           updated_at: string
           variant_label_bn: string
@@ -306,6 +307,7 @@ export type Database = {
           product_id: string
           sku?: string | null
           sort_order?: number
+          stock?: number | null
           unit_price?: number
           updated_at?: string
           variant_label_bn?: string
@@ -323,6 +325,7 @@ export type Database = {
           product_id?: string
           sku?: string | null
           sort_order?: number
+          stock?: number | null
           unit_price?: number
           updated_at?: string
           variant_label_bn?: string
@@ -349,6 +352,9 @@ export type Database = {
           is_active: boolean
           name_bn: string
           name_en: string
+          product_code: string | null
+          short_description_bn: string | null
+          short_description_en: string | null
           sort_order: number
           updated_at: string
         }
@@ -362,6 +368,9 @@ export type Database = {
           is_active?: boolean
           name_bn?: string
           name_en: string
+          product_code?: string | null
+          short_description_bn?: string | null
+          short_description_en?: string | null
           sort_order?: number
           updated_at?: string
         }
@@ -375,6 +384,9 @@ export type Database = {
           is_active?: boolean
           name_bn?: string
           name_en?: string
+          product_code?: string | null
+          short_description_bn?: string | null
+          short_description_en?: string | null
           sort_order?: number
           updated_at?: string
         }
