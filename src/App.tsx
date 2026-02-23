@@ -42,6 +42,7 @@ const AdminSEO = lazy(() => import("./pages/admin/AdminSEO"));
 const AdminBackup = lazy(() => import("./pages/admin/AdminBackup"));
 const AdminAbout = lazy(() => import("./pages/admin/AdminAbout"));
 const AdminVariantGenerator = lazy(() => import("./pages/admin/AdminVariantGenerator"));
+const AdminSalesReport = lazy(() => import("./pages/admin/AdminSalesReport"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -124,6 +125,7 @@ const App = () => (
                 <Route path="backup" element={<Suspense fallback={<AdminFallback />}><AdminBackup /></Suspense>} />
                 <Route path="about" element={<Suspense fallback={<AdminFallback />}><AdminAbout /></Suspense>} />
                 <Route path="variants" element={<Suspense fallback={<AdminFallback />}><AdminVariantGenerator /></Suspense>} />
+                <Route path="sales-report" element={<Suspense fallback={<AdminFallback />}><AdminSalesReport /></Suspense>} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
