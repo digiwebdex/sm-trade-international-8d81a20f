@@ -207,12 +207,12 @@ const HeroSection = () => {
                   if (absOff > 2) return null;
 
                   // Full 3D cube transforms
-                  const tX = offset * 170;
-                  const scale = absOff === 0 ? 1.12 : absOff === 1 ? 0.78 : 0.55;
-                  const opacity = absOff === 0 ? 1 : absOff === 1 ? 0.65 : 0.3;
+                  const tX = offset * 180;
+                  const scale = absOff === 0 ? 1.12 : absOff === 1 ? 0.85 : 0.62;
+                  const opacity = absOff === 0 ? 1 : absOff === 1 ? 0.75 : 0.4;
                   const zIndex = 10 - absOff;
-                  const rotY = offset * 40;
-                  const tZ = absOff === 0 ? 0 : absOff === 1 ? -80 : -160;
+                  const rotY = offset * 35;
+                  const tZ = absOff === 0 ? 0 : absOff === 1 ? -60 : -130;
 
                   return (
                     <div
