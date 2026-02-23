@@ -276,8 +276,17 @@ const ProductDetail = () => {
     <div className="min-h-screen bg-background pt-2 pb-20">
       <div className="container mx-auto px-4 max-w-7xl">
 
-        {/* Breadcrumb — Amazon style */}
-        <nav className="flex items-center gap-1.5 text-xs text-muted-foreground py-3 flex-wrap">
+        {/* Back button + Breadcrumb */}
+        <div className="flex items-center gap-3 py-3">
+          <button
+            onClick={() => navigate(-1)}
+            className="shrink-0 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            {lang === 'en' ? 'Back' : 'ফিরুন'}
+          </button>
+          <span className="text-border">|</span>
+          <nav className="flex items-center gap-1.5 text-xs text-muted-foreground flex-wrap">
           <Link to="/" className="hover:text-accent hover:underline transition-colors">{lang === 'en' ? 'Home' : 'হোম'}</Link>
           <ChevronRight className="h-3 w-3" />
           <Link to="/products" className="hover:text-accent hover:underline transition-colors">{lang === 'en' ? 'Products' : 'পণ্য'}</Link>
@@ -289,7 +298,8 @@ const ProductDetail = () => {
           )}
           <ChevronRight className="h-3 w-3" />
           <span className="text-foreground truncate max-w-[200px]">{title}</span>
-        </nav>
+          </nav>
+        </div>
 
         {/* ─── Main 2-Column Layout (Amazon: image left, info right) ─── */}
         <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,4fr)] gap-6 lg:gap-10 items-start">
