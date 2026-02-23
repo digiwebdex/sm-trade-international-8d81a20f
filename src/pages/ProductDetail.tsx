@@ -16,7 +16,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import ProductImageGallery, { TypedImage } from '@/components/product/ProductImageGallery';
 import OptimizedImage from '@/components/OptimizedImage';
 import { toast } from 'sonner';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'; // utility for conditional classnames
 
 const BULK_TIERS = [
   { min: 1, max: 49, discount: 0, label: '1–49' },
