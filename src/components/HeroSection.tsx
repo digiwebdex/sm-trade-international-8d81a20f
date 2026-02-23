@@ -9,6 +9,9 @@ import { ChevronLeft, ChevronRight, ArrowRight, Pause, Play } from 'lucide-react
 import OptimizedImage from '@/components/OptimizedImage';
 import heroBg from '@/assets/hero-bg.jpg';
 
+// Module-level flag: animations only play on first ever mount
+let hasAnimated = false;
+
 // Static fallback images
 import product3 from '@/assets/products/product-3.png';
 import tiesBlue from '@/assets/products/ties-blue.png';
@@ -42,6 +45,14 @@ const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const isFirstLoad = !hasAnimated;
+
+  useEffect(() => {
+    if (!hasAnimated) hasAnimated = true;
+  }, []);
+
+  const anim = (delay: string) =>
+    isFirstLoad ? { animation: `heroFadeUp 0.7s ${delay} ease-out both` } : {};
 
   const title = get('hero', 'title', t('hero.title'));
   const subtitle = get('hero', 'subtitle', t('hero.subtitle'));
@@ -60,7 +71,8 @@ const HeroSection = () => {
       if (error) throw error;
       return data;
     },
-    staleTime: 60 * 1000,
+    staleTime: 5 * 60 * 1000,
+    placeholderData: (prev: any) => prev,
   });
 
   const carouselItems = dbProducts && dbProducts.length >= 4
@@ -110,7 +122,7 @@ const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[500px] lg:min-h-[560px]">
 
           {/* Left — Value Proposition */}
-          <div className="flex flex-col justify-center" style={{ animation: 'heroFadeUp 0.7s ease-out both' }}>
+          <div className="flex flex-col justify-center" style={anim('0s')}>
             <span
               className="inline-flex items-center gap-2 text-primary-foreground/60 text-xs font-semibold tracking-[0.2em] uppercase mb-5"
               style={{ fontFamily: 'Montserrat, DM Sans, sans-serif' }}
@@ -121,21 +133,21 @@ const HeroSection = () => {
 
             <h1
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] mb-5 text-white"
-              style={{ animation: 'heroFadeUp 0.7s 0.1s ease-out both' }}
+              style={anim('0.1s')}
             >
               {title}
             </h1>
 
             <p
               className="text-base md:text-lg text-white/60 mb-8 max-w-lg leading-relaxed"
-              style={{ fontFamily: 'DM Sans, sans-serif', animation: 'heroFadeUp 0.7s 0.2s ease-out both' }}
+              style={{ fontFamily: 'DM Sans, sans-serif', ...anim('0.2s') }}
             >
               {subtitle}
             </p>
 
             <div
               className="flex flex-col sm:flex-row gap-4"
-              style={{ animation: 'heroFadeUp 0.7s 0.3s ease-out both' }}
+              style={anim('0.3s')}
             >
               <Button
                 asChild
@@ -166,7 +178,7 @@ const HeroSection = () => {
             {/* Stats row */}
             <div
               className="grid grid-cols-4 gap-4 mt-10 pt-8 border-t border-white/10"
-              style={{ animation: 'heroFadeUp 0.7s 0.5s ease-out both' }}
+              style={anim('0.5s')}
             >
               {stats.map(s => (
                 <div key={s.label}>
@@ -180,7 +192,7 @@ const HeroSection = () => {
           {/* Right — 3D Cube Carousel */}
           <div
             className="relative flex flex-col items-center justify-center"
-            style={{ animation: 'heroFadeUp 0.7s 0.4s ease-out both' }}
+            style={anim('0.4s')}
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
