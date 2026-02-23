@@ -6,32 +6,20 @@ import { ChevronLeft, ChevronRight, ArrowRight, Pause, Play } from 'lucide-react
 import OptimizedImage from '@/components/OptimizedImage';
 import heroBg from '@/assets/hero-bg.jpg';
 
-// Product images for carousel
+// Only import the 6 images needed for 5-card visible window
 import product3 from '@/assets/products/product-3.png';
-import product4 from '@/assets/products/product-4.png';
-import product5 from '@/assets/products/product-5.png';
-import product7 from '@/assets/products/product-7.png';
-import product8 from '@/assets/products/product-8.png';
-import product9 from '@/assets/products/product-9.png';
-import product10 from '@/assets/products/product-10.png';
-import product12 from '@/assets/products/product-12.png';
 import tiesBlue from '@/assets/products/ties-blue.png';
 import glassware from '@/assets/products/glassware.png';
-import tunnelSouvenir from '@/assets/products/tunnel-souvenir.png';
+import product8 from '@/assets/products/product-8.png';
+import product10 from '@/assets/products/product-10.png';
 import bpatcBuilding from '@/assets/products/bpatc-building.png';
 
 const carouselItems = [
   { img: product3, label: 'Crystal Awards' },
   { img: tiesBlue, label: 'Premium Ties' },
   { img: glassware, label: 'Custom Glassware' },
-  { img: product4, label: 'Leather Goods' },
-  { img: product5, label: 'Branded Pens' },
-  { img: product7, label: 'Office Accessories' },
   { img: product8, label: 'Gift Sets' },
-  { img: product9, label: 'Desk Organizers' },
   { img: product10, label: 'Premium Souvenirs' },
-  { img: product12, label: 'Executive Gifts' },
-  { img: tunnelSouvenir, label: 'Custom Souvenirs' },
   { img: bpatcBuilding, label: 'Model Replicas' },
 ];
 

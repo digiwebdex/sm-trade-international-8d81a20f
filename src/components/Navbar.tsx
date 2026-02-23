@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { usePrefetchHome } from '@/hooks/usePrefetchHome';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import logo from '@/assets/logo.jpeg';
+import logo from '@/assets/logo-sm.webp';
 
 const Navbar = () => {
   const { t, lang } = useLanguage();
