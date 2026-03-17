@@ -12,12 +12,7 @@ import heroBg from '@/assets/hero-bg.jpg';
 // Module-level flag: animations only play on first ever mount
 let hasAnimated = false;
 
-const stats = [
-  { value: '500+', label: 'Clients' },
-  { value: '10+', label: 'Years' },
-  { value: '1000+', label: 'Products' },
-  { value: '50+', label: 'Countries' },
-];
+// Stats are now fetched from site settings
 
 const SPEED = 3500;
 const CUBE_SIZE = 280; // px – height & depth of cube
@@ -46,6 +41,11 @@ const HeroSection = () => {
   const title = get('hero', 'title', t('hero.title'));
   const subtitle = get('hero', 'subtitle', t('hero.subtitle'));
   const ctaPrimary = get('hero', 'cta_primary', t('hero.cta'));
+
+  const stats = [1, 2, 3, 4].map(n => ({
+    value: get('hero', `stat${n}_value`, n === 1 ? '500+' : n === 2 ? '10+' : n === 3 ? '1000+' : '50+'),
+    label: get('hero', `stat${n}_label`, n === 1 ? 'Clients' : n === 2 ? 'Years' : n === 3 ? 'Products' : 'Countries'),
+  }));
 
   // Fetch all active products from DB — synced with product gallery
   const { data: dbProducts } = useQuery({

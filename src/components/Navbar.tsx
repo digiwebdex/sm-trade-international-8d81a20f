@@ -3,16 +3,19 @@ import { Menu, X, Search, ChevronDown, Tag } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { usePrefetchHome } from '@/hooks/usePrefetchHome';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import logo from '@/assets/logo-sm.webp';
 
 const Navbar = () => {
   const { t, lang } = useLanguage();
+  const { get } = useSiteSettings();
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
   const prefetchHome = usePrefetchHome();
+  const companyName = get('branding', 'company_name', 'S. M. Trade International');
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -127,9 +130,9 @@ const Navbar = () => {
 
         {/* Logo + Brand name */}
         <a href={resolveHref('#home')} className="flex items-center gap-2.5 group flex-shrink-0">
-          <img src={logo} alt="S. M. Trade International" className="h-9 w-9 rounded object-cover" />
+          <img src={logo} alt={companyName} className="h-9 w-9 rounded object-cover" />
           <span className="hidden sm:block font-bold text-base leading-tight whitespace-nowrap" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            S. M. Trade International
+            {companyName}
           </span>
         </a>
 

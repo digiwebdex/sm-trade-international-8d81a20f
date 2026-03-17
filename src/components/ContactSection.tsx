@@ -110,9 +110,30 @@ const ContactSection = () => {
               {t('contact.whatsapp')}
             </a>
 
-            <div className="bg-muted rounded-xl h-48 flex items-center justify-center text-muted-foreground text-sm mt-4 shadow-sm">
-              Google Maps Placeholder
-            </div>
+            {(() => {
+              const mapsUrl = get('branding', 'google_maps_embed', '');
+              if (mapsUrl) {
+                return (
+                  <div className="rounded-xl overflow-hidden h-48 shadow-sm mt-4">
+                    <iframe
+                      src={mapsUrl}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Location Map"
+                    />
+                  </div>
+                );
+              }
+              return (
+                <div className="bg-muted rounded-xl h-48 flex items-center justify-center text-muted-foreground text-sm mt-4 shadow-sm">
+                  {lang === 'en' ? 'Add Google Maps URL in Admin Settings → Branding' : 'অ্যাডমিন সেটিংস → ব্র্যান্ডিং থেকে Google Maps URL যোগ করুন'}
+                </div>
+              );
+            })()}
           </div>
         </div>
       </div>
