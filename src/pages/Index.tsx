@@ -20,7 +20,7 @@ const sectionComponents: Record<string, React.ComponentType> = {
   process: ProcessSection,
   products: ProductsSection,
   clients: ClientsSection,
-  calculator: BulkOrderCalculator,
+  
   quote: QuoteRequestForm,
   contact: ContactSection,
 };
