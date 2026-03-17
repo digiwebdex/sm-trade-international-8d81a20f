@@ -371,7 +371,7 @@ const ProductDetail = () => {
               <div className="space-y-3">
                 <div className="text-sm flex items-center gap-1.5">
                   <span className="text-muted-foreground">{lang === 'en' ? 'Color Family' : 'রঙের ধরন'}:</span>
-                  <span className="font-semibold text-foreground">{selectedColor || uniqueColors[0]?.color_name || ''}</span>
+                  <span className="font-semibold text-foreground">{effectiveColor || uniqueColors[0]?.color_name || ''}</span>
                 </div>
                 <div className="flex flex-wrap gap-2.5">
                   {uniqueColors.map(v => {
