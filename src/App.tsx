@@ -130,6 +130,7 @@ const App = () => (
                 <Route path="backup" element={<Suspense fallback={<AdminFallback />}><AdminBackup /></Suspense>} />
                 <Route path="about" element={<Suspense fallback={<AdminFallback />}><AdminAbout /></Suspense>} />
                 <Route path="variants" element={<Suspense fallback={<AdminFallback />}><AdminVariantGenerator /></Suspense>} />
+                <Route path="quotes" element={<Suspense fallback={<AdminFallback />}><AdminQuoteRequests /></Suspense>} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
