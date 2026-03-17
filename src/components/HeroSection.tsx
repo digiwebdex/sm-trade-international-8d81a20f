@@ -186,40 +186,45 @@ const HeroSection = () => {
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
           >
-            {/* Ambient glow behind active card */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-accent/10 blur-[80px] pointer-events-none" />
+            {/* Ambient glow layers */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-accent/15 blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[45%] w-48 h-48 rounded-full bg-primary/20 blur-[60px] pointer-events-none" />
 
             {/* 3D Cube */}
-            <div className="relative w-full flex justify-center mb-6" style={{ perspective: '1200px' }}>
+            <div className="relative w-full flex justify-center mb-8" style={{ perspective: '1000px' }}>
               <div
                 className="relative"
                 style={{
-                  width: 300,
-                  height: CUBE_SIZE,
+                  width: 320,
+                  height: CUBE_SIZE + 20,
                   transformStyle: 'preserve-3d',
+                  transform: 'rotateX(2deg)',
                 }}
               >
-                {/* The rotating cube container — key forces remount to reset rotation */}
+                {/* Cube container */}
                 <div
                   key={`${current}-${prevIdx}`}
                   style={{
-                    width: 300,
-                    height: CUBE_SIZE,
+                    width: 320,
+                    height: CUBE_SIZE + 20,
                     position: 'relative',
                     transformStyle: 'preserve-3d',
                     animation: animating
                       ? direction === 'next'
-                        ? 'cubeRotateNext 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards'
-                        : 'cubeRotatePrev 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+                        ? 'cubeRotateNext 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards'
+                        : 'cubeRotatePrev 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards'
                       : undefined,
                   }}
                 >
-                  {/* Front face — shows prevIdx during animation, current when idle */}
+                  {/* Front face */}
                   <div
-                    className="absolute inset-0 rounded-2xl overflow-hidden bg-white shadow-[0_20px_70px_-15px_hsl(var(--sm-gold)/0.4)] ring-2 ring-accent/20 cursor-pointer"
+                    className="absolute inset-0 rounded-3xl overflow-hidden cursor-pointer"
                     style={{
                       backfaceVisibility: 'hidden',
-                      transform: `translateZ(${CUBE_SIZE / 2}px)`,
+                      transform: `translateZ(${(CUBE_SIZE + 20) / 2}px)`,
+                      background: 'linear-gradient(145deg, #ffffff 0%, #f8f6f3 100%)',
+                      boxShadow: '0 25px 80px -20px hsl(var(--sm-gold) / 0.35), 0 10px 30px -10px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8)',
+                      border: '1.5px solid hsl(var(--sm-gold) / 0.25)',
                     }}
                     onClick={() => {
                       const item = carouselItems[current];
@@ -227,90 +232,134 @@ const HeroSection = () => {
                       else navigate('/catalog');
                     }}
                   >
-                    <div className="p-4 flex items-center justify-center h-full">
+                    {/* Decorative corner accents */}
+                    <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-accent/30 rounded-tl-xl" />
+                    <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-accent/30 rounded-tr-xl" />
+                    <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-accent/30 rounded-bl-xl" />
+                    <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-accent/30 rounded-br-xl" />
+
+                    <div className="p-6 flex items-center justify-center h-full">
                       <OptimizedImage
                         src={carouselItems[animating ? prevIdx : current]?.img || ''}
                         alt={carouselItems[animating ? prevIdx : current]?.label || ''}
-                        className="w-full h-full object-contain"
-                        sizes="300px"
+                        className="w-full h-full object-contain drop-shadow-lg"
+                        sizes="320px"
                         priority
                         blurPlaceholder={false}
                       />
                     </div>
-                    <div className="absolute bottom-0 inset-x-0 h-14 bg-gradient-to-t from-accent/10 to-transparent pointer-events-none" />
+                    <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-accent/8 to-transparent pointer-events-none" />
                   </div>
 
-                  {/* Right face — incoming item when rotating next */}
+                  {/* Right face */}
                   <div
-                    className="absolute inset-0 rounded-2xl overflow-hidden bg-white shadow-xl ring-2 ring-accent/20"
+                    className="absolute inset-0 rounded-3xl overflow-hidden"
                     style={{
                       backfaceVisibility: 'hidden',
-                      transform: `rotateY(90deg) translateZ(${CUBE_SIZE / 2}px)`,
+                      transform: `rotateY(90deg) translateZ(${(CUBE_SIZE + 20) / 2}px)`,
+                      background: 'linear-gradient(145deg, #ffffff 0%, #f8f6f3 100%)',
+                      boxShadow: '0 25px 80px -20px hsl(var(--sm-gold) / 0.35), inset 0 1px 0 rgba(255,255,255,0.8)',
+                      border: '1.5px solid hsl(var(--sm-gold) / 0.25)',
                     }}
                   >
-                    <div className="p-4 flex items-center justify-center h-full">
+                    <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-accent/30 rounded-tl-xl" />
+                    <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-accent/30 rounded-tr-xl" />
+                    <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-accent/30 rounded-bl-xl" />
+                    <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-accent/30 rounded-br-xl" />
+                    <div className="p-6 flex items-center justify-center h-full">
                       <OptimizedImage
                         src={carouselItems[current]?.img || ''}
                         alt={carouselItems[current]?.label || ''}
-                        className="w-full h-full object-contain"
-                        sizes="300px"
+                        className="w-full h-full object-contain drop-shadow-lg"
+                        sizes="320px"
                         blurPlaceholder={false}
                       />
                     </div>
                   </div>
 
-                  {/* Left face — incoming item when rotating prev */}
+                  {/* Left face */}
                   <div
-                    className="absolute inset-0 rounded-2xl overflow-hidden bg-white shadow-xl ring-2 ring-accent/20"
+                    className="absolute inset-0 rounded-3xl overflow-hidden"
                     style={{
                       backfaceVisibility: 'hidden',
-                      transform: `rotateY(-90deg) translateZ(${CUBE_SIZE / 2}px)`,
+                      transform: `rotateY(-90deg) translateZ(${(CUBE_SIZE + 20) / 2}px)`,
+                      background: 'linear-gradient(145deg, #ffffff 0%, #f8f6f3 100%)',
+                      boxShadow: '0 25px 80px -20px hsl(var(--sm-gold) / 0.35), inset 0 1px 0 rgba(255,255,255,0.8)',
+                      border: '1.5px solid hsl(var(--sm-gold) / 0.25)',
                     }}
                   >
-                    <div className="p-4 flex items-center justify-center h-full">
+                    <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-accent/30 rounded-tl-xl" />
+                    <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-accent/30 rounded-tr-xl" />
+                    <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-accent/30 rounded-bl-xl" />
+                    <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-accent/30 rounded-br-xl" />
+                    <div className="p-6 flex items-center justify-center h-full">
                       <OptimizedImage
                         src={carouselItems[current]?.img || ''}
                         alt={carouselItems[current]?.label || ''}
-                        className="w-full h-full object-contain"
-                        sizes="300px"
+                        className="w-full h-full object-contain drop-shadow-lg"
+                        sizes="320px"
                         blurPlaceholder={false}
                       />
                     </div>
                   </div>
                 </div>
+
+                {/* Reflection / shadow below cube */}
+                <div
+                  className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-[70%] h-8 rounded-full pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(ellipse, hsl(var(--sm-gold) / 0.2) 0%, transparent 70%)',
+                    filter: 'blur(8px)',
+                  }}
+                />
               </div>
 
-              {/* Nav arrows */}
+              {/* Nav arrows — refined */}
               <button
                 onClick={prev}
-                className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/15 bg-white/5 backdrop-blur-md flex items-center justify-center text-white/60 hover:text-white hover:border-accent/40 hover:bg-accent/10 transition-all duration-300 z-20"
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-white/50 hover:text-white hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300 z-20 shadow-lg shadow-black/10"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={next}
-                className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full border border-white/15 bg-white/5 backdrop-blur-md flex items-center justify-center text-white/60 hover:text-white hover:border-accent/40 hover:bg-accent/10 transition-all duration-300 z-20"
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl flex items-center justify-center text-white/50 hover:text-white hover:border-accent/50 hover:bg-accent/15 hover:scale-110 transition-all duration-300 z-20 shadow-lg shadow-black/10"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Active label */}
-            <div
-              className="text-sm font-semibold px-5 py-1.5 mb-5 rounded-full bg-accent text-accent-foreground shadow-lg shadow-accent/25 transition-all duration-300"
-              style={{ fontFamily: 'DM Sans, sans-serif' }}
-            >
-              {carouselItems[current]?.label}
+            {/* Active label + controls */}
+            <div className="flex items-center gap-3">
+              <div
+                className="text-sm font-semibold px-6 py-2 rounded-full bg-gradient-to-r from-accent to-accent/80 text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-500"
+                style={{ fontFamily: 'DM Sans, sans-serif' }}
+              >
+                {carouselItems[current]?.label}
+              </div>
+              <button
+                onClick={() => setPaused(p => !p)}
+                className="w-9 h-9 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center text-white/40 hover:text-white/70 hover:border-accent/30 transition-all duration-300"
+                title={paused ? 'Play' : 'Pause'}
+              >
+                {paused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+              </button>
             </div>
 
-            {/* Pause/Play */}
-            <button
-              onClick={() => setPaused(p => !p)}
-              className="w-9 h-9 rounded-full border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center text-white/40 hover:text-white/70 transition-all duration-300"
-              title={paused ? 'Play' : 'Pause'}
-            >
-              {paused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
-            </button>
+            {/* Dot indicators */}
+            <div className="flex items-center gap-1.5 mt-4">
+              {carouselItems.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  className={`rounded-full transition-all duration-500 ${
+                    i === current
+                      ? 'w-6 h-2 bg-accent shadow-sm shadow-accent/40'
+                      : 'w-2 h-2 bg-white/20 hover:bg-white/40'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
           )}
         </div>
